@@ -1,0 +1,14 @@
+{
+  "name": "sqlayout",
+  "version": "1.0.0",
+  "description": "Object Relationnal Mapper for sql",
+  "main": "sqlayout.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thibtoy",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}
