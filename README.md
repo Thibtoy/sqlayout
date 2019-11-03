@@ -167,77 +167,77 @@ Start with sqlayout:
 		the server console to update the database schema (the second part of this method is not yet implemented :s);
 
 
-	Using sqlayout models:
+Using sqlayout models:
 
-		Accessing an initialised model:
+	Accessing an initialised model:
 
-			Each initialised model is stored in the `sqlayout.models` object, you can access them like this:
+		Each initialised model is stored in the `sqlayout.models` object, you can access them like this:
 
-					->`sqlayout.models.tableName`
+				->`sqlayout.models.tableName`
 
-				For example, to access our userModel, use:
+			For example, to access our userModel, use:
 
-					->`sqlayout.models.users`
+				->`sqlayout.models.users`
 
-				You can use a shortCut in your code like this:
+			You can use a shortCut in your code like this:
 
-					->`let models = sqlayout.models;
+				->`let models = sqlayout.models;
 
-				or
+			or
 
-					->`let userModel = sqlayout.models.users`
-
-
-		Using a model:
-
-			Once you access your initialised model, you can now use his methods:
-
-			requireModel(): 
-
-				This method will return you an empty model that allow you to use the `recordSafe()` method
-				once you have fill it.
-
-				You can fill the empty model by accessing the 'content' property of each field:
-
-						->`let record = sqlayout.models.tableName.getModel()
-							record.columnName.content = dataToRecord`
-
-					with our userModel:
-
-						->`let newUser = sqlayout.models.users.getModel()
-							newUser.name = 'Thibault';
-							newUser.email = 'thibault@jaimail.coum';
-							newUser.password = '1PassWordP4sSiCompliqué?';
-
-					Since we declared `autoInc = true` for the id field of our userModel, we don't have to care
-					about it.
+				->`let userModel = sqlayout.models.users`
 
 
-			recordSafe(record):
+	Using a model:
 
-				This method will insert the new record in your database, and it will tcheck the validity of the 
-				record before to perform it (for example with our user, it will tcheck the format of the email
-				and if the password fill all conditions) it also tcheck if you filled a not nullable field or 
-				not.
+		Once you access your initialised model, you can now use his methods:
 
-				If the record is not correct, the method will return an array of all error messages and
-				correspondent fields (by default: 'incorrect' + columnName if data is not valid, columnName +
-				'must be filled' if the field is empty and not nullable).
+		requireModel(): 
 
-				recordSafe return a callback:
+			This method will return you an empty model that allow you to use the `recordSafe()` method
+			once you have fill it.
 
-						->`sqlayout.models.tableName.recordSafe(record, function(success, data) {
-								if (!success) throw data;
-								console.log(data) //outpout the inserted id of your record
-							});`
+			You can fill the empty model by accessing the 'content' property of each field:
 
-					If the request fail, data will be the sql error message.
+					->`let record = sqlayout.models.tableName.getModel()
+						record.columnName.content = dataToRecord`
 
-					With our userModel:
+				with our userModel:
 
-						->`sqlayout.models.users.recordSafe(newUser, function(success, data) {
-								if (!success) throw data;
-							});`
+					->`let newUser = sqlayout.models.users.getModel()
+						newUser.name = 'Thibault';
+						newUser.email = 'thibault@jaimail.coum';
+						newUser.password = '1PassWordP4sSiCompliqué?';
+
+				Since we declared `autoInc = true` for the id field of our userModel, we don't have to care
+				about it.
+
+
+		recordSafe(record):
+
+			This method will insert the new record in your database, and it will tcheck the validity of the 
+			record before to perform it (for example with our user, it will tcheck the format of the email
+			and if the password fill all conditions) it also tcheck if you filled a not nullable field or 
+			not.
+
+			If the record is not correct, the method will return an array of all error messages and
+			correspondent fields (by default: 'incorrect' + columnName if data is not valid, columnName +
+			'must be filled' if the field is empty and not nullable).
+
+			recordSafe return a callback:
+
+					->`sqlayout.models.tableName.recordSafe(record, function(success, data) {
+							if (!success) throw data;
+							console.log(data) //outpout the inserted id of your record
+						});`
+
+				If the request fail, data will be the sql error message.
+
+				With our userModel:
+
+					->`sqlayout.models.users.recordSafe(newUser, function(success, data) {
+							if (!success) throw data;
+						});`
 
 
 		  
